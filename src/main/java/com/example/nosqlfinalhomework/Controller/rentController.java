@@ -105,7 +105,7 @@ public class rentController {
             return "租借信息插入成功";
         }
     }
-    @GetMapping("/rent/queryStudentAllRM") //查询所有学生的所有租借信息
+    @GetMapping("/rent/queryStudentAllRM") //查询单个学生的所有租借信息
     public List<ItemState> queryStudentAllRM(@RequestParam String studentID){
         List<ItemState> itemStates=new ArrayList<>();
         Query query=Query.query(Criteria.where("studentID").is(studentID));
@@ -114,6 +114,13 @@ public class rentController {
         Rent rent=mongoTemplate.findOne(query,Rent.class);
         itemStates=rent.getItemState();
         return itemStates;
+    }
+    @GetMapping("/rent/queryStudenttOneRM") //查询所有学生的所有租借信息
+    public List<Rent> queryStudentOneRM(){
+        List<ItemState> itemStates=new ArrayList<>();
+        ItemState itemState=new ItemState();
+        List<Rent> rent=mongoTemplate.findAll(Rent.class);
+        return rent;
     }
     @GetMapping("/rent/queryStudentNeedReturn") //根据学生id查询是否有要归还的东西
     public List<ItemState> queryStudentNeedReturn(@RequestParam String studentID){
