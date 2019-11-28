@@ -23,7 +23,7 @@ public class itemController {
     MongoTemplate mongoTemplate;
 
 
-    @GetMapping("/items/insertTable") //插入物品文档
+    @PostMapping("/items/insertTable") //插入物品文档
     public String insertTable(@RequestParam String itemName,@RequestParam float price,
                          @RequestParam float rent,@RequestParam String blSchool,@RequestParam List<String> schoolPlace,
                          @RequestParam String id,@RequestParam String isRent,
