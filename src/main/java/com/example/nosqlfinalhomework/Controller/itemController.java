@@ -45,7 +45,7 @@ public class itemController {
         mongoTemplate.save(item);
         return "插入成功";
     }
-    @GetMapping("/items/insertUState") //插入雨伞状态信息
+    @PostMapping("/items/insertUState") //插入雨伞状态信息
     public String insertUState(@RequestParam String id,@RequestParam String isRent,
                               @RequestParam String position){
         State state=new State();
@@ -57,7 +57,7 @@ public class itemController {
         mongoTemplate.updateFirst(query,update1,Items.class);
         return "state插入成功";
     }
-    @GetMapping("/items/insertPState") //插入充电宝状态信息
+    @PostMapping("/items/insertPState") //插入充电宝状态信息
     public String insertPState(@RequestParam String id,@RequestParam String isRent,
                                @RequestParam String position){
         State state=new State();
@@ -76,7 +76,7 @@ public class itemController {
         items=mongoTemplate.find(query,Items.class);
         return items;
     }
-    @GetMapping("/items/deleteUid") //通过雨伞id 删除
+    @PostMapping("/items/deleteUid") //通过雨伞id 删除
     public String deleteUid(@RequestParam String uid,@RequestParam String isRent,
                             @RequestParam String position){
         State state=new State();
@@ -95,7 +95,7 @@ public class itemController {
         }
         return "删除失败";
     }
-    @GetMapping("/items/deletePid") //通过充电宝id 删除
+    @PostMapping("/items/deletePid") //通过充电宝id 删除
     public String deletePid(@RequestParam String pid,@RequestParam String isRent,
                             @RequestParam String position){
         State state=new State();

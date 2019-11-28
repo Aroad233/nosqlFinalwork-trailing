@@ -103,7 +103,7 @@ public class rentController {
             return "租借信息插入成功";
         }
     }
-    @GetMapping("/rent/queryStudentAllRM")
+    @PostMapping("/rent/queryStudentAllRM")
     public List<ItemState> queryStudentAllRM(@RequestParam String studentID){
         List<ItemState> itemStates=new ArrayList<>();
         Query query=Query.query(Criteria.where("studentID").is(studentID));
