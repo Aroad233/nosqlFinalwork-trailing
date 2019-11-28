@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.data.mongodb.core.query.Query;
 
 import java.sql.Array;
@@ -115,5 +112,15 @@ public class itemController {
             return "删除成功";
         }
         return "删除失败";
+    }
+    @PostMapping("/item/updateUPrice")
+    public String updateUPrice(@RequestParam String itemName,@RequestParam float price){
+        Query query=Query.query(Criteria.where("itemName").is(itemName));
+        Update update=Update.update("itemName",itemName).set("price",price);
+        if(mongoTemplate.count(query,Items.class)>0){
+            mongoTemplate.updateFirst(query,update,Items.class);
+            return "更改价格成功";
+        }
+        return  "更改价格失败 请确认是否存在数据";
     }
 }
